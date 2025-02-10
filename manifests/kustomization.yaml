@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: backstage
+
+resources:
+  - base/backstage-namespace.yml
+  - base/backstage-sealedsecret.yml
+  - base/backstage-svc.yml
+  - base/backstage.yml
+  - base/postgres-sealedsecret.yml
+  - base/postgres-storage.yml
+  - base/postgres-svc.yml
+  - base/postgres.yml
+
+
