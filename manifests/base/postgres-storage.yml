@@ -4,6 +4,7 @@ metadata:
   name: postgres-storage
   namespace: backstage
   labels:
+    app: postgres
     type: local
 spec:
   storageClassName: manual
@@ -20,6 +21,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: postgres-storage-claim
   namespace: backstage
+  labels:
+    app: postgres
 spec:
   storageClassName: manual
   accessModes:
