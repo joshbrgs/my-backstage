@@ -7,11 +7,14 @@ spec:
     - scmProvider:
         github:
           organization: joshbrgs
-          repositoryMatch: "app-*"
           allBranches: false
           tokenRef:
             secretName: backstage-secrets
             key: GITHUB_TOKEN
+      filters:
+        - repositoryMatch: ^app-
+          pathsExist: [manifests]
+          pathsDoNotExist: [disabledrepo.txt]
   template:
     metadata:
       name: "{{ repository }}"
