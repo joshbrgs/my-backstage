@@ -12,5 +12,7 @@ resources:
   - base/postgres-storage.yml
   - base/postgres-svc.yml
   - base/postgres.yml
+  # Applcation set for apps from software catalog
+  - base/application-set.yml
 
 

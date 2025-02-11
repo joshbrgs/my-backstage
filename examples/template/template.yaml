@@ -2,9 +2,9 @@ apiVersion: scaffolder.backstage.io/v1beta3
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
 kind: Template
 metadata:
-  name: example-nodejs-template
-  title: Example Node.js Template
-  description: An example template for the scaffolder that creates a simple Node.js service
+  name: react-template
+  title: React Template
+  description: A React template that creates a basic React app with Cookiecutter
 spec:
   owner: user:guest
   type: service
@@ -12,14 +12,22 @@ spec:
   # These parameters are used to generate the input form in the frontend, and are
   # used to gather input data for the execution of the template.
   parameters:
-    - title: Fill in some steps
+    - title: Let's React to something
       required:
-        - name
+        - project_name
+        - github_username
       properties:
-        name:
+        project_name:
           title: Name
           type: string
-          description: Unique name of the component
+          description: Unique name of the app
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        github_username:
+          title: Github Username
+          type: string
+          description: Your github username
           ui:autofocus: true
           ui:options:
             rows: 5
@@ -41,11 +49,13 @@ spec:
     # Each step executes an action, in this case one templates files into the working directory.
     - id: fetch-base
       name: Fetch Base
-      action: fetch:template
+      action: fetch:cookiecutter
       input:
         url: ./content
         values:
-          name: ${{ parameters.name }}
+          project_name: ${{ parameters.project_name }}
+          github_username: ${{ parameters.github_username }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
@@ -53,7 +63,7 @@ spec:
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: This is ${{ parameters.name }}
+        description: This is ${{ parameters.project_name }}
         repoUrl: ${{ parameters.repoUrl }}
 
     # The final step is to register our new component in the catalog.

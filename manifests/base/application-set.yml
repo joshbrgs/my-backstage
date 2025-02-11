@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: new-apps-set
+spec:
+  generators:
+    - scmProvider:
+        github:
+          organization: joshbrgs
+          repositoryMatch: "app-*"
+          allBranches: false
+          tokenRef:
+            name: backstage-secrets
+            key: GITHUB_TOKEN
+  template:
+    metadata:
+      name: "{{ repository }}"
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/joshbrgs/{{ repository }}"
+        targetRevision: HEAD
+        path: "manifests"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ repository }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{cookiecutter.project_slug}}-app
+  labels:
+    app: {{cookiecutter.project_slug}}-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{cookiecutter.project_slug}}-app
+  template:
+    metadata:
+      labels:
+        app: {{cookiecutter.project_slug}}-app
+    spec:
+      containers:
+        - name: {{cookiecutter.project_slug}}-app
+          image: ghcr.io/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
