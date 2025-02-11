@@ -31,17 +31,6 @@ spec:
           ui:autofocus: true
           ui:options:
             rows: 5
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -55,16 +44,15 @@ spec:
         values:
           project_name: ${{ parameters.project_name }}
           github_username: ${{ parameters.github_username }}
-          destination: ${{ parameters.repoUrl | parseRepoUrl }}
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
       name: Publish
-      action: publish:github
+      action: github:repo:create
       input:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.project_name }}
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: github.com?${{ parameters.project_name }}&owner=${{ parameters.github_username }}
 
     # The final step is to register our new component in the catalog.
     - id: register
