@@ -52,7 +52,7 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.project_name }}
-        repoUrl: github.com?app-${{ parameters.project_name }}&owner=${{ parameters.github_username }}
+        repoUrl: github.com?repo=app-${{ parameters.project_name }}&owner=${{ parameters.github_username }}
 
     # The final step is to register our new component in the catalog.
     - id: register
