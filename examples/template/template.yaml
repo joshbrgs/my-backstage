@@ -53,7 +53,7 @@ spec:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.project_name }}
         repoUrl: github.com?repo=app-${{ parameters.project_name }}&owner=${{ parameters.github_username }}
-        sourcePath: /app-${{ parameters.project_name }}/.
+        sourcePath: ./app-${{ parameters.project_name }}
         defaultBranch: main
 
     # The final step is to register our new component in the catalog.
