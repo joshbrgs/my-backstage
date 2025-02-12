@@ -65,14 +65,6 @@ spec:
         catalogInfoPath: '/catalog-info.yaml'
         optional: true
 
-    - id: build
-      name: Build Image
-      action: github:actions:dispatch
-      input:
-        repoUrl: github.com?repo=app-${{ parameters.project_name|replace(" ", "-")|replace("_", "-")|replace(".", "-")|lower|trim }}&owner=${{ parameters.github_username }}
-        workflowId: build.yml
-        branchOrTagName: main
-
     - id: app
       name: ArgoCD App
       action: publish:github:pull-request
