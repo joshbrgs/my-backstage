@@ -77,8 +77,8 @@ spec:
           This PR adds an ArgoCD App for ${{ parameters.project_name }}.
           It will deploy the app to the `argocd` namespace.
         commitMessage: Add ArgoCD App for ${{ parameters.project_name }}
-        sourcePath: /manifests/.
-        targetPath: /manifests/.
+        sourcePath: ./manifests/
+        targetPath: ./manifests/
       output:
         remoteUrl: ${{ steps['app'].output.remoteUrl }}
 
