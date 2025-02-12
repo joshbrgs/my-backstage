@@ -3,7 +3,7 @@ data:
   name: {{cookiecutter.project_slug}}
   project: default
   type: repo
-  url: https://github.com/{{cookiecutter.github_username}}/app-{{cookiecutter.prokect_slug}}.git
+  url: https://github.com/{{cookiecutter.github_username}}/app-{{cookiecutter.project_slug}}.git
 kind: Secret
 metadata:
   labels:
