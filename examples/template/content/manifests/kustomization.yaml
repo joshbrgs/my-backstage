@@ -13,5 +13,6 @@ resources:
   - base/postgres-svc.yml
   - base/postgres.yml
   - base/{{cookiecutter.project_slug}}-application.yml
+  - base/{{cookiecutter.project_slug}}-repo.yml
 
 
