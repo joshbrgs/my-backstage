@@ -54,6 +54,7 @@ spec:
         description: This is ${{ parameters.project_name }}
         repoUrl: github.com?repo=app-${{ parameters.project_name }}&owner=${{ parameters.github_username }}
         sourcePath: app-${{ parameters.project_name }}/.
+        defaultBranch: main
 
     # The final step is to register our new component in the catalog.
     - id: register
@@ -62,6 +63,33 @@ spec:
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
         catalogInfoPath: '/catalog-info.yaml'
+
+    - id: build
+      name: Build Image
+      action: github:actions:dispatch
+      input:
+        repoUrl: github.com?repo=app-${{ parameters.project_name }}&owner=${{ parameters.github_username }}
+        workflowId: build.yml
+        branchOrTagName: main
+
+    - id: app
+      name: ArgoCD App
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=my-backstage&owner=${{ parameters.github_username }}
+        branchName: argocd-app-${{ parameters.project_name }}
+        targetBranchName: main
+        title: Add ArgoCD App for ${{ parameters.project_name }}
+        description: |
+          This PR adds an ArgoCD App for ${{ parameters.project_name }}.
+          It will deploy the app to the `argocd` namespace.
+        commitMessage: Add ArgoCD App for ${{ parameters.project_name }}
+        sourcePath: /manifests/.
+        targetPath: /manifests/.
+      output:
+        remoteUrl: ${{ steps['app'].output.remoteUrl }}
+
+
 
   # Outputs are displayed to the user after a successful execution of the template.
   output:
