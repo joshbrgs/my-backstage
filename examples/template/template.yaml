@@ -79,6 +79,7 @@ spec:
         commitMessage: Add ArgoCD App for ${{ parameters.project_name }}
         sourcePath: ./manifests/
         targetPath: ./manifests/
+        update: true
       output:
         remoteUrl: ${{ steps['app'].output.remoteUrl }}
 
