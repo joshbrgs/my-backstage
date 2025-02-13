@@ -1,9 +1,9 @@
 apiVersion: v1
 data:
-  name: an-app
-  project: default
-  type: repo
-  url: https://github.com/joshbrgs/app-an-app.git
+  name: $(echo -n "an-app" | base64)
+  project: $(echo -n "default" | base64)
+  type: $(echo -n "repo" | base64)
+  url: $(echo -n "https://github.com/joshbrgs/app-an-app.git" | base64)
 kind: Secret
 metadata:
   labels:
