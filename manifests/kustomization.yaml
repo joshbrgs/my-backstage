@@ -10,5 +10,7 @@ resources:
   - base/postgres-storage.yml
   - base/postgres-svc.yml
   - base/postgres.yml
+  - base/why-hello-application.yml
+  - base/why-hello-repo.yml
 
 
