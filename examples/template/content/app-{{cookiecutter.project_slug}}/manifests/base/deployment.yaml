@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: {{cookiecutter.project_slug}}-app
-          image: ghcr.io/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}:latest
+          image: ghcr.io/{{cookiecutter.github_username}}/app-{{cookiecutter.project_slug}}:latest
           ports:
             - containerPort: 80
           resources:
