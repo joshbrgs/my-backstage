@@ -34,6 +34,10 @@ backend:
       port: 5432
       user: ${POSTGRES_USER}
       password: ${POSTGRES_PASSWORD}
+    plugin:
+      auth:
+        connection:
+          database: pg_auth_set_by_user
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
